@@ -1,0 +1,26 @@
+{
+  "name": "keyception",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A short interactive puzzle where every key unlocks another unnecessary lock.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUDARSHANCHAUDHARI/Keyception.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUDARSHANCHAUDHARI/Keyception/issues"
+  },
+  "homepage": "https://github.com/SUDARSHANCHAUDHARI/Keyception#readme",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "start": "pnpm dev",
+    "check": "node --check script.js && node --check scripts/build.mjs && node scripts/verify.mjs",
+    "build": "pnpm check && node scripts/build.mjs",
+    "preview": "python3 -m http.server 4173 --directory dist"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.28.2"
+}

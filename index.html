@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      name="description"
+      content="Keyception — a short interactive puzzle where every key unlocks another unnecessary lock."
+    />
+    <meta name="theme-color" content="#0b2431" />
+    <title>Keyception — Department of Recursive Access</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#puzzle">Skip to the puzzle</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Keyception home">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="15" cy="24" r="9" />
+          <path d="M24 24h18m-6 0v6m-6-6v4" />
+          <circle cx="15" cy="24" r="3" />
+        </svg>
+        <span>
+          <strong>Keyception</strong>
+          <small>Dept. of Recursive Access</small>
+        </span>
+      </a>
+
+      <div class="header-controls" aria-label="Puzzle controls">
+        <button class="utility-button" id="soundToggle" type="button" aria-pressed="true">
+          <span class="sound-icon" aria-hidden="true">◖))</span>
+          <span class="control-label">Sound on</span>
+        </button>
+        <button class="utility-button" id="resetButton" type="button" aria-label="Reset puzzle">
+          <span aria-hidden="true">↺</span>
+          <span class="control-label">Reset</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow">Form K-3 · Access request pending</p>
+          <h1 id="page-title">One door.<br /><em>Too many keys.</em></h1>
+        </div>
+        <div class="intro-instructions">
+          <p>
+            Drag each issued key into its designated lock. Expect the designation to
+            change without notice.
+          </p>
+          <p class="keyboard-hint">
+            Keyboard: focus the key, use arrow keys to move it, then press
+            <kbd>Enter</kbd> to test it.
+          </p>
+        </div>
+      </section>
+
+      <section class="puzzle-shell" id="puzzle" aria-labelledby="stageTitle">
+        <div class="progress-rail">
+          <div class="progress-heading">
+            <span>Clearance chain</span>
+            <strong id="progressCount">0 / 3</strong>
+          </div>
+          <ol class="stage-list" id="stageList" aria-label="Puzzle progress">
+            <li class="is-current" aria-current="step">
+              <span class="stage-index">I</span>
+              <span><b>Plausible</b><small>Brass / ordinary</small></span>
+            </li>
+            <li>
+              <span class="stage-index">II</span>
+              <span><b>Questionable</b><small>Jointed / self-aware</small></span>
+            </li>
+            <li>
+              <span class="stage-index">III</span>
+              <span><b>Administrative</b><small>Impossible / final*</small></span>
+            </li>
+          </ol>
+
+          <div class="event-ledger" aria-labelledby="ledgerTitle">
+            <p id="ledgerTitle">Incident ledger</p>
+            <ol id="eventFeed">
+              <li>Key issued. Confidence unwarranted.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="puzzle-panel">
+          <header class="stage-header">
+            <div>
+              <p class="stage-kicker" id="stageKicker">Key I · Intake</p>
+              <h2 id="stageTitle">The plausible key</h2>
+            </div>
+            <div class="attempt-meter" aria-label="Current lock attempts">
+              <span id="attemptLabel">Test 0 of 2</span>
+              <div class="attempt-pips" aria-hidden="true">
+                <i></i><i></i>
+              </div>
+            </div>
+          </header>
+
+          <div
+            class="puzzle-board"
+            id="puzzleBoard"
+            data-stage="1"
+            aria-describedby="stageBrief liveStatus"
+          >
+            <svg class="board-lines" viewBox="0 0 1200 720" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 120H1200M180 0V720M1000 0V720" />
+              <path class="dash" d="M60 610C240 490 340 650 500 545S800 400 1110 560" />
+              <circle cx="180" cy="120" r="6" />
+              <circle cx="1000" cy="120" r="6" />
+            </svg>
+
+            <p class="board-coordinate" aria-hidden="true">VAULT 03-B / NO PUBLIC EXIT</p>
+
+            <div class="final-reveal" id="finalReveal" aria-hidden="true" inert>
+              <div class="inner-door" aria-hidden="true">
+                <span class="inner-lock"></span>
+              </div>
+              <p class="final-stamp">ACCESS<br />RECURSIVE</p>
+              <div class="final-copy">
+                <span>Congratulations, technically.</span>
+                <strong>You have unlocked<br />another problem.</strong>
+                <button class="final-reset" id="finalReset" type="button">Begin again</button>
+              </div>
+            </div>
+
+            <div class="door-mount" id="doorMount" aria-hidden="true">
+              <div class="door-frame">
+                <div class="door-shadow"></div>
+                <div class="door-panel" id="door">
+                  <svg viewBox="0 0 360 520" preserveAspectRatio="none">
+                    <rect class="door-fill" x="8" y="8" width="344" height="504" rx="2" />
+                    <rect class="door-inset" x="42" y="52" width="276" height="154" />
+                    <rect class="door-inset" x="42" y="238" width="276" height="220" />
+                    <path class="door-mark" d="M56 80h92M56 94h62M56 266h108" />
+                    <circle class="door-rivet" cx="326" cy="26" r="5" />
+                    <circle class="door-rivet" cx="326" cy="494" r="5" />
+                    <circle class="door-rivet" cx="34" cy="26" r="5" />
+                    <circle class="door-rivet" cx="34" cy="494" r="5" />
+                  </svg>
+                  <span class="door-number">03</span>
+                  <span class="door-handle"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="drawer-unit" id="drawer" aria-hidden="true">
+              <span class="drawer-label">UNNECESSARY / SPARES</span>
+              <div class="drawer-body">
+                <div class="drawer-front">
+                  <span class="drawer-pull"></span>
+                  <span class="drawer-code">K–02</span>
+                </div>
+                <svg class="drawer-key" viewBox="0 0 190 80">
+                  <circle cx="38" cy="40" r="24" />
+                  <circle cx="38" cy="40" r="9" />
+                  <path d="M62 40h102m-22 0v17m-18-17v10" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="small-door" id="smallDoor" aria-hidden="true">
+              <span>DOOR 03-B-⅓</span>
+              <i></i>
+            </div>
+
+            <div
+              class="lock-target"
+              id="lockTarget"
+              role="img"
+              aria-label="Lock for the plausible key"
+            >
+              <svg viewBox="0 0 120 150" aria-hidden="true">
+                <path class="shackle" d="M30 61V42a30 30 0 0 1 60 0v19" />
+                <rect class="lock-body" x="10" y="56" width="100" height="84" rx="6" />
+                <circle class="lock-rivet" cx="26" cy="73" r="3" />
+                <circle class="lock-rivet" cx="94" cy="73" r="3" />
+                <path class="keyhole" d="M60 82a11 11 0 0 0-6 20l-5 22h22l-5-22a11 11 0 0 0-6-20Z" />
+              </svg>
+              <span class="lock-label">L–01</span>
+            </div>
+
+            <button
+              class="key-token"
+              id="keyToken"
+              type="button"
+              aria-label="Plausible brass key. Drag it to the lock, use arrow keys to move it, or press Enter to test it."
+            >
+              <span class="key-tag" aria-hidden="true">ISSUED · I</span>
+              <svg class="key-art" viewBox="0 0 300 132" aria-hidden="true">
+                <g class="key-shape key-one">
+                  <circle cx="64" cy="66" r="43" />
+                  <circle cx="64" cy="66" r="18" />
+                  <path d="M107 66h158m-22 0v28m-28-28v18" />
+                </g>
+                <g class="key-shape key-two">
+                  <path d="M22 66c0-28 18-45 43-45 26 0 40 16 40 39 0 20-13 32-27 32-13 0-21-9-21-20 0-12 8-19 18-19 8 0 13 5 13 12" />
+                  <path d="M102 66h48l16-18 18 36 18-36 18 36 17-18h40m-22 0v25" />
+                </g>
+                <g class="key-shape key-three">
+                  <path d="M21 66 52 25l36 5 22 36-24 39-38 2Z" />
+                  <circle cx="66" cy="66" r="15" />
+                  <path d="M108 66h45l14-23 22 46 21-46 19 23h49m-18 0v27m-22-27v16" />
+                  <path class="key-inner-lock" d="M62 57a7 7 0 0 0-4 12l-3 10h14l-3-10a7 7 0 0 0-4-12Z" />
+                </g>
+              </svg>
+              <span class="key-grip" aria-hidden="true">Drag here</span>
+            </button>
+
+            <div class="duplicate-key" id="duplicateKey" aria-hidden="true">
+              <svg viewBox="0 0 190 80">
+                <circle cx="38" cy="40" r="24" />
+                <circle cx="38" cy="40" r="9" />
+                <path d="M62 40h102m-22 0v17m-18-17v10" />
+              </svg>
+            </div>
+
+            <div class="tiny-thief" id="tinyThief" aria-hidden="true">
+              <span class="thief-head">•⌢•</span>
+              <span class="thief-body"></span>
+              <span class="thief-arm"></span>
+            </div>
+
+            <div class="hidden-eye" aria-hidden="true"><i></i></div>
+            <svg class="paperclip" viewBox="0 0 40 80" aria-hidden="true">
+              <path d="M26 15v43c0 18-23 18-23 0V18c0-23 34-23 34 0v42c0 31-43 31-43 0V25" />
+            </svg>
+
+            <div class="event-banner" id="eventBanner" aria-hidden="true">
+              <span>Irregularity detected</span>
+              <strong id="eventMessage">The lock has moved.</strong>
+            </div>
+          </div>
+
+          <footer class="stage-footer">
+            <p id="stageBrief">
+              A reassuringly normal key for a suspiciously well-documented door.
+            </p>
+            <div class="status-line" aria-live="polite" aria-atomic="true">
+              <span class="status-light" aria-hidden="true"></span>
+              <span id="liveStatus">Key ready. Drag it into lock L–01.</span>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <p class="footnote">
+        * “Final” is a procedural term and does not imply an ending.
+      </p>
+    </main>
+  </body>
+</html>
