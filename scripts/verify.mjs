@@ -76,6 +76,17 @@ assert.match(css, /prefers-reduced-motion:\s*reduce/, "Reduced-motion support is
 assert.match(css, /@media \(max-width:/, "Responsive styles are missing");
 assert.match(readme, /## Puzzle flow/, "README puzzle flow is missing");
 
+for (const color of ["#15152a", "#fff5df", "#ff5d5d", "#4f7cff", "#ffd166", "#58d6a9", "#b695ff"]) {
+  assert.match(css, new RegExp(color, "i"), `Missing shared TinyChaos color ${color}`);
+}
+assert.match(css, /--display:\s*Impact/, "Display typography must use the condensed family stack");
+assert.match(css, /--body:\s*"Arial Rounded MT Bold"/, "Body typography must use the rounded family stack");
+assert.match(css, /body\s*\{[\s\S]*min-width:\s*0;[\s\S]*overflow-x:\s*clip;[\s\S]*overflow-y:\s*auto;/, "Body must preserve vertical scroll and no positive minimum width");
+assert.match(css, /html\s*\{[\s\S]*min-width:\s*0;/, "HTML must not impose a positive minimum width");
+assert.match(css, /button:focus-visible,[\s\S]*outline:\s*4px solid var\(--blue\)/, "Focus must use TinyChaos blue");
+assert.match(html, /href="https:\/\/sudarshanchaudhari\.github\.io\/TinyChaos\/"/, "TinyChaos gallery link is required");
+assert.match(html, /Keyception · by Sudarshan Chaudhari/, "Author attribution is required");
+
 const localReferences = [...html.matchAll(/(?:href|src)="([^"#]+)"/g)]
   .map((match) => match[1])
   .filter((reference) => !reference.includes(":") && !reference.startsWith("/"));
