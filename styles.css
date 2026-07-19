@@ -138,10 +138,11 @@ a:focus-visible {
 .utility-button {
   min-height: 42px;
   padding: 8px 14px;
-  border: 0;
-  border-left: var(--border);
-  background: transparent;
-  color: var(--paper-muted);
+  border: 3px solid var(--ink);
+  border-radius: 0.55rem;
+  background: var(--butter);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
   cursor: pointer;
   font: 700 0.69rem/1 var(--utility);
   letter-spacing: 0.08em;
@@ -150,8 +151,9 @@ a:focus-visible {
 }
 
 .utility-button:hover {
-  background: rgba(220, 228, 223, 0.08);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
+  transform: translate(-1px, -1px);
 }
 
 .sound-icon {
